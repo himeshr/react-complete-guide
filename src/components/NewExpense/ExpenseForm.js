@@ -63,6 +63,17 @@ const ExpenseForm = (props) => {
     // })
   }
 
+  const newExpenseCancelHandler = (event) => {
+    //dont reload page on form submission
+    event.preventDefault();
+    //reset on submit
+    setEnteredTitle('');
+    setEnteredAmount('');
+    setEnteredDate('');
+    //bubble up the cancel
+    props.onExpenseCancel();
+  }
+
   return (<form onSubmit={newExpenseSubmissionHandler}>
     <div className='new-expense__controls'>
       <div className='new-expense__control'>
@@ -79,6 +90,7 @@ const ExpenseForm = (props) => {
       </div>
     </div>
     <div className='new-expense__actions'>
+      <button type='button' onClick={newExpenseCancelHandler}>Cancel</button>
       <button type='submit'>Add expense</button>
     </div>
   </form>);

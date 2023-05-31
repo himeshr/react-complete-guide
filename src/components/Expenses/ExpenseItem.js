@@ -9,11 +9,6 @@ function ExpenseItem(props) {
   const [title, setTitle] = useState(props.title); //React ensures that title is not re-initialized with props value on later reloads
   //State has to be initialized inside Component main body only
 
-  //Handler for an event, methods suffixed with handler
-  const onClickHandler = () => {
-    setTitle('Updated!');
-    console.log(title);
-  }
   return (
     <div className="expense-item">
       <ExpenseDate date={props.date}/>
@@ -23,7 +18,6 @@ function ExpenseItem(props) {
           <h2>{title}</h2>
           <div className="expense-item__price">${props.amount}</div>
           {/* "onEvent declarations", event callbacks specified using onSomeEvent */}
-          <button onClick={onClickHandler}>Update Title</button>
         </div>
       </div>
     </div>);

@@ -7,8 +7,11 @@ function NewExpense(props) {
     const newExpenseItem = {...newExpense, id: Math.random()};
     props.onSave(newExpenseItem);
   }
+  const addNewExpenseCancelHandler = () => {
+    props.onCancel();
+  }
   return (<div className='new-expense'>
-      <ExpenseForm onExpenseSave={newExpenseSaveHandler}/>
+      <ExpenseForm onExpenseSave={newExpenseSaveHandler} onExpenseCancel={addNewExpenseCancelHandler}/>
     </div>);
 }
 

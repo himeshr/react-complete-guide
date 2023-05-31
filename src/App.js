@@ -1,5 +1,7 @@
 import Expenses from './components/Expenses/Expenses';
 import NewExpense from './components/NewExpense/NewExpense';
+import {useState} from 'react';
+import AddNewExpense from './components/NewExpense/AddNewExpense';
 
 function App() {
 
@@ -14,14 +16,31 @@ function App() {
   },
   ];
 
+  const [allExpenses, setAllExpenses] = useState(expenses);
+  const [showAddExpense, setShowAddExpense] = useState(true);
+
   const expenseSaveHandler = (expense) => {
     console.log('In App', expense);
+    setAllExpenses(prevState => {
+      prevState.push(expense);
+      return prevState;
+    })
+    cancelAddExpenseHandler();
+  }
+
+  const cancelAddExpenseHandler = () => {
+    setShowAddExpense(true);
+  }
+
+  const showAddExpenseHandler = () => {
+    setShowAddExpense(false);
   }
 
   return (
     <div>
-      <NewExpense onSave={expenseSaveHandler}/>
-      <Expenses data={expenses}/>
+      {showAddExpense ? <AddNewExpense onAddClick={showAddExpenseHandler}/>
+        : <NewExpense onSave={expenseSaveHandler} onCancel={cancelAddExpenseHandler}/>}
+      <Expenses data={allExpenses}/>
     </div>
   );
 }
